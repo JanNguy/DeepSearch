@@ -19,7 +19,7 @@ def ask_ollama(prompt, model="phi3"):
 
 prompt = str(input("Enter your prompt: "))
 
-text = read_pdf("final_output.pdf")
+text = read_pdf("files/final_output.pdf")
 
 tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
