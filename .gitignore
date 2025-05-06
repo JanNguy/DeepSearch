@@ -1,0 +1,13 @@
+# Environnement virtuel
+hackathon/
+
+# Fichiers lourds typiques
+*.dylib
+*.so
+*.pth
+*.bin
+
+# Fichiers de données volumineux
+*.pdf
+*.pptx
+*.zip
