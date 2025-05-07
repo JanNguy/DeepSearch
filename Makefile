@@ -5,4 +5,5 @@ setup:
 	. hackathon/bin/activate && pip install -r requirement.txt
 
 run:
-	. hackathon/bin/activate && python main.py
+	. hackathon/bin/activate && python src/deep_search_ollama.py
+	python src/link.py
