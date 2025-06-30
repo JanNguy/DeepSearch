@@ -1,10 +1,8 @@
-# search.py
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-
 
 def extract_keywords(prompt, language='english'):
     words = word_tokenize(prompt.lower())
@@ -27,7 +25,8 @@ def extract_text(soup, tags):
     for t in tags:
         for el in soup.find_all(t):
             txt = el.get_text(strip=True)
-            if txt: out.append(txt)
+            if txt:
+                out.append(txt)
     return out
 
 def crawl_and_collect(base_url, prompt, max_pages=5):
@@ -41,13 +40,14 @@ def crawl_and_collect(base_url, prompt, max_pages=5):
     pages = []
     while to_visit and len(visited)<max_pages:
         url = to_visit.pop()
-        if url in visited: continue
+        if url in visited:
+            continue
         visited.add(url)
         soup = fetch_soup(url)
-        if not soup: continue
+        if not soup:
+            continue
         texts = extract_text(soup, tags)
         pages.append((url, texts))
-        # enqueue links
         for a in soup.find_all('a', href=True):
             href = urljoin(url, a['href'])
             pl = urlparse(href).netloc
@@ -65,8 +65,10 @@ def filter_relevant(pages, prompt, max_chars=4000, min_len=15):
     for url, texts in pages:
         for t in texts:
             tl = t.strip()
-            if len(tl)<min_len: continue
-            if any(r in tl.lower() for r in irrelevant): continue
+            if len(tl)<min_len:
+                continue
+            if any(r in tl.lower() for r in irrelevant):
+                continue
             if any(k in tl.lower() for k in keywords):
                 entry = f"From {url}:\n• {tl}\n"
                 if count + len(entry)>max_chars:

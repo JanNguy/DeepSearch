@@ -12,7 +12,6 @@ def extract_keywords(prompt, language='english'):
     words = word_tokenize(prompt.lower())
     stop_words = set(stopwords.words(language))
     keywords = [w for w in words if w.isalnum() and w not in stop_words]
-    # Ajouter des synonymes pour "dark"
     if 'dark' in keywords:
         if language == 'french':
             keywords.extend(['sombre', 'noir', 'obscur'])
@@ -100,14 +99,12 @@ def filter_relevant_content(md_file, keywords, prompt, max_chars=4000, min_lengt
             if len(text) < min_length or any(term.lower() in text.lower() for term in irrelevant_terms):
                 continue
             if any(keyword in text.lower() for keyword in keywords):
-                # Vérifier si l'ajout dépasse la limite de caractères
                 line_chars = len(f"From {current_url}:\n- {text}\n")
                 if char_count + line_chars > max_chars:
                     break
                 relevant_content.append((current_url, text))
                 char_count += line_chars
 
-    # Générer une réponse concise
     if not relevant_content:
         response = f"No relevant information found for prompt: {prompt}\nTry a more specific URL or broader keywords."
         return response[:max_chars]
@@ -134,14 +131,12 @@ def main():
         print("Prompt required.")
         return
 
-    # Détecter la langue (simplifié)
     language = 'french' if 'wikipedia.org/wiki' in base_url else 'english'
     keywords = extract_keywords(prompt, language)
     tags_to_extract = ['title', 'h1', 'h2', 'h3', 'p', 'div', 'li']
 
     results = crawl_links(base_url, keywords, tags_to_extract)
 
-    # Sauvegarder le contenu brut
     md_file = 'output.md'
     with open(md_file, 'w', encoding='utf-8') as f:
         f.write(f"# Scraped results for: {prompt}\n\n")
@@ -152,7 +147,6 @@ def main():
 
     print("✅ Done! Scraped content saved to output.md.")
 
-    # Filtrer et générer la réponse pertinente
     filtered_response = filter_relevant_content(md_file, keywords, prompt)
     with open('filtered_output.md', 'w', encoding='utf-8') as f:
         f.write(filtered_response)

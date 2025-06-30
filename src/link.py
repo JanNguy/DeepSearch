@@ -44,17 +44,14 @@ def main():
         print("Prompt required.")
         return
 
-    # Chemin vers le fichier Markdown généré
     md_file = "filtered_output.md"
     text = read_markdown(md_file)
     if not text:
         print("No content to process. Check if filtered_output.md exists and is not empty.")
         return
 
-    # Diviser le texte en chunks
     chunks = split_into_chunks(text, max_chars=3000)
 
-    # Initialiser une réponse globale
     total_response = ""
     total_chars = 0
     max_total_chars = 4000
@@ -75,10 +72,9 @@ def main():
                 print("Response truncated to stay within 4000 character limit.")
             else:
                 total_response += response + "\n\n"
-                total_chars += response_chars + 2  # Compter les "\n\n"
+                total_chars += response_chars + 2
             print(f"Chunk response:\n{response}")
 
-    # Sauvegarder la réponse finale
     with open("ollama_response.md", "w", encoding="utf-8") as f:
         f.write(total_response)
     print(f"\n✅ Final response saved to ollama_response.md (length: {len(total_response)} chars).")

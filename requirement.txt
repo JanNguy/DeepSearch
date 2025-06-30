@@ -1,17 +1,17 @@
-beautifulsoup4==4.12.3  # HTML/XML parsing
-requests==2.31.0        # HTTP requests
-selenium==4.18.1        # JS-rendered page support (optional)
-webdriver-manager==4.0.1  # Auto-install ChromeDriver
-lxml==5.2.1             # Fast parser for BeautifulSoup
-nltk==3.8.1             # Natural Language Toolkit
-pymupdf==1.23.26        # Fast PDF parsing (fitz)
-fpdf2==2.7.7            # PDF generation
-sentence-transformers==2.6.1  # Embeddings (optional)
-chromadb==0.4.24              # Vector store (optional)
-langchain                     # LLM orchestration
-langchain-community           # Community integrations
-faiss-cpu                     # Vector search backend
-python-pptx==0.6.23    # PowerPoint generation (optional)
-numpy==1.26.4          # Core scientific computing
-tqdm==4.66.2           # Progress bars
+beautifulsoup4==4.12.3
+requests==2.31.0
+selenium==4.18.1
+webdriver-manager==4.0.1
+lxml==5.2.1
+nltk==3.8.1
+pymupdf==1.23.26
+fpdf2==2.7.7
+sentence-transformers==2.6.1
+chromadb==0.4.24
+langchain
+langchain-community
+faiss-cpu
+python-pptx==0.6.23
+numpy==1.26.4
+tqdm==4.66.2
 markdown

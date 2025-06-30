@@ -1,4 +1,3 @@
-# llm_client.py
 import ollama
 
 def ask_ollama(prompt, context, model="deepseek-r1", max_tokens=4000):

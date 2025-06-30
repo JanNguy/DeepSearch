@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Deep Search & LLM</title>
-  <script>
-  async function runQuery(){
-    document.getElementById('status').innerText = 'Processing…';
-    let base = document.getElementById('base_url').value;
-    let q    = document.getElementById('query').value;
-    let res  = await fetch('/api/query',{
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({base_url:base, query:q})
-    });
-    let j = await res.json();
-    if (j.error){
-      document.getElementById('status').innerText = j.error;
-      return;
-    }
-    document.getElementById('status').innerText = 'Done';
-    document.getElementById('context').value = j.filtered_context;
-    document.getElementById('response').value = j.llm_response;
-  }
-  </script>
-</head>
-<body>
-  <h1>Deep Search + LLM</h1>
-  <input id="base_url" placeholder="https://example.com" size="50"><br>
-  <input id="query"    placeholder="Votre question..." size="50"><br>
-  <button onclick="runQuery()">Rechercher & Analyser</button>
-  <p id="status"></p>
-  <h2>Filtered context</h2>
-  <textarea id="context" rows="10" cols="80"></textarea>
-  <h2>LLM Response</h2>
-  <textarea id="response" rows="10" cols="80"></textarea>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title>Deep Search & LLM</title>
+        <script>
+            async function runQuery(){
+                document.getElementById('status').innerText = 'Processing…';
+                let base = document.getElementById('base_url').value;
+                let q = document.getElementById('query').value;
+                let res = await fetch('/api/query',{
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({base_url:base, query:q})
+                });
+                let j = await res.json();
+                if (j.error){
+                document.getElementById('status').innerText = j.error;
+                return;
+                }
+                document.getElementById('status').innerText = 'Done';
+                document.getElementById('context').value = j.filtered_context;
+                document.getElementById('response').value = j.llm_response;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Deep Search + LLM</h1>
+        <input id="base_url" placeholder="https://example.com" size="50"><br>
+        <input id="query" placeholder="Votre question..." size="50"><br>
+        <button onclick="runQuery()">Rechercher & Analyser</button>
+        <p id="status"></p>
+        <h2>Filtered context</h2>
+        <textarea id="context" rows="10" cols="80"></textarea>
+        <h2>LLM Response</h2>
+        <textarea id="response" rows="10" cols="80"></textarea>
+    </body>
 </html>
