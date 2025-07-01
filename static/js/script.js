@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function getRealResponse(userMessage, base_url) {
         try {
-            // 1. /api/search
             let searchRes = await fetch('/api/search', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -71,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
             let searchJson = await searchRes.json();
             if (!searchRes.ok) throw (searchJson.error || "Erreur sur /api/search");
 
-            // 2. /api/analyze
             let analyzeRes = await fetch('/api/analyze', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

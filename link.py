@@ -1,5 +1,6 @@
 import ollama
 from transformers import AutoTokenizer
+import re
 
 def read_markdown(file_path):
     try:
@@ -42,13 +43,16 @@ def ask_ollama(prompt, chunk, model="deepseek-r1", max_response_chars=4000):
         return ""
 
 def main():
+    base = "Do a simple reseponse without any extra information, just the answer to the question and dont speak about your way of thinking and all the 'User ask information about this person' type \n."
     prompt = input("Enter your prompt: ").strip()
+    prompt = base + prompt
 
     if not prompt:
         print("Prompt required.")
         return
 
     md_file = "filtered_output.md"
+
     text = read_markdown(md_file)
     if not text:
         print("No content to process. Check if filtered_output.md exists and is not empty.")
@@ -79,8 +83,6 @@ def main():
             print(f"Chunk response:\n{response}")
     with open("ollama_response.md", "w", encoding="utf-8") as f:
         f.write(total_response)
-
-    print(f"\n✅ Final response saved to ollama_response.md (length: {len(total_response)} chars).")
 
 if __name__ == "__main__":
     main()
