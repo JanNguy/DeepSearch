@@ -9,6 +9,7 @@ Deep search function to be carried out as part of a hackathon organized by Hande
 ```bash
   git clone git@github.com:JanNguy/DeepSearch.git
   sh start.sh
+  python app.py
 ```
 ## Demo
 
